@@ -133,7 +133,44 @@ Scenario 3 line colors by function bit:
   - Request timeout: `2000 ms`
   - Communication timeout status threshold: `3000 ms`
 
-For deeper technical details about FATEK register maps, address models, and protocol-level behavior, consult the official FATEK manuals.
+For deeper technical details about FATEK register maps, address models, and protocol-level behavior, use the manuals in [`Manuale/`](Manuale/) (summarized below).
+
+## Documentation (`Manuale/`)
+
+This folder keeps **offline PDFs, ZIP archives, wiring notes, and reference projects** for FATEK serial protocols, PLC programming, and related hardware. Use it when you need the official framing, command codes, register/converter addressing, or connection details beyond what this README summarizes.
+
+### FATEK PLC communication (most relevant for this firmware)
+
+| Document | What it is for |
+|----------|----------------|
+| [`08_M_PLC_Binary_Communication_Protocol_User_Manual_en.pdf`](Manuale/08_M_PLC_Binary_Communication_Protocol_User_Manual_en.pdf) | **Primary reference:** FATEK PLC binary / serial communication protocol (frames, commands, usage). Aligns with how this project talks to the PLC over RS232-style serial. |
+| [`Chapter_12.pdf`](Manuale/Chapter_12.pdf), [`Appendix1.pdf`](Manuale/Appendix1.pdf), [`Apendix 2.pdf`](Manuale/Apendix%202.pdf) | Supplementary chapters / appendices (protocol and addressing detail—check TOC inside each PDF). |
+| [`Manuale/Comunicare/FATEK manuals/Manual_1_All_en.zip`](Manuale/Comunicare/FATEK%20manuals/Manual_1_All_en.zip), [`Manual_2_All_en.zip`](Manuale/Comunicare/FATEK%20manuals/Manual_2_All_en.zip) | Bundled FATEK manual collections (English); unzip locally for full PLC/system documentation. |
+| [`Manuale/Comunicare/FATEK manuals/WinProladder_Manual_en.pdf`](Manuale/Comunicare/FATEK%20manuals/WinProladder_Manual_en.pdf) | WinProladder programming environment reference. |
+
+### RS232 sample / protocol helpers (aligned with this repo)
+
+| Path | What it is for |
+|------|----------------|
+| [`Manuale/Comunicare/RS232 ASCII Fatek communication protocol/FatekSimpleTest/`](Manuale/Comunicare/RS232%20ASCII%20Fatek%20communication%20protocol/FatekSimpleTest/) | Small Arduino-style example (`FatekSimpleTest.ino`) plus `LRC_checksum` helpers—useful cross-check for framing/LRC behaviour vs `main/LRC_checksum.*`. |
+
+### Hardware datasheets & installation
+
+| Document | What it is for |
+|----------|----------------|
+| [`trs3232e.pdf`](Manuale/trs3232e.pdf) | RS-232 line driver/receiver IC datasheet (level shifting / UART ↔ RS232). |
+| [`MT8072iP_Datasheet_ENG.pdf`](Manuale/MT8072iP_Datasheet_ENG.pdf), [`GME871P30_MT8072iP_Installation_221019.pdf`](Manuale/GME871P30_MT8072iP_Installation_221019.pdf) | HMI / panel datasheet and installation notes. |
+| [`FATEK_FB_FBs_B1_B1z.pdf`](Manuale/FATEK_FB_FBs_B1_B1z.pdf) | FATEK FB documentation (PLC instruction/function blocks—PLC-side programming reference). |
+
+### Modbus RTU / RS485 (reference only—this project uses FATEK RS232, not Modbus here)
+
+For comparison, troubleshooting serial buses in general, or work on sibling RS485 projects, see [`Manuale/Comunicare/Curs ModBus RTU/`](Manuale/Comunicare/Curs%20ModBus%20RTU/) (Modbus overview, addressing, function codes, troubleshooting PDFs) and [`Manuale/Comunicare/RS485 proiect/`](Manuale/Comunicare/RS485%20proiect/) (RS485 wiring images, MAX485 datasheet, Modbus specification excerpts, older firmware snippets).
+
+### Diagrams & photos (`Manuale/` root)
+
+- [`Rs232.png`](Manuale/Rs232.png), [`RS232 - banana.jpg`](Manuale/RS232%20-%20banana.jpg), [`Rs485 COM.png`](Manuale/Rs485%20COM.png) — quick visual references for serial interfaces.
+
+**Note:** Large binaries under `Manuale/` may not be suitable for every Git host; if you mirror only source code elsewhere, copy `Manuale/` separately or rely on official FATEK downloads.
 
 ## Project Structure
 
@@ -144,6 +181,7 @@ For deeper technical details about FATEK register maps, address models, and prot
 - `main/LRC_checksum.cpp` - LRC checksum implementation used by FATEK RS232 frames.
 - `registrii FATEK utilizati.txt` - register usage reference.
 - `culori folosite.txt` - color reference notes.
+- `Manuale/` - manuals, datasheets, and communication reference materials (see **Documentation (`Manuale/`)** above).
 
 ## Wiring and Reference Images
 
